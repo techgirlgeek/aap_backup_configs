@@ -13,10 +13,14 @@ spec:
       template:
         spec:
           serviceAccountName: default
+          # --- POD LEVEL SECURITY ---
           securityContext:
-            allowPrivilegeEscalation: false
             runAsUser: 1000
-            runAsgroup: 1000
+            runAsGroup: 1000
+            fsGroup: 1000
+            runAsNonRoot: true  # Required by 'restricted'
+            seccompProfile:
+              type: RuntimeDefault  # Required by 'restricted'
           restartPolicy: OnFailure
           volumes:
             - name: playbook-volume
