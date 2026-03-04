@@ -6,4 +6,4 @@ metadata:
   namespace: {{ .Values.namespace }}
 data:
   backup.yaml: |-
-{{ .Files.Get "files/playbook.yaml" | indent 4 }}
+    {{ .Files.Get "files/playbook.yaml" | indent 4 }}
