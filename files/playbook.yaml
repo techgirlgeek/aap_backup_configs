@@ -14,22 +14,10 @@
     token_path: "/var/run/secrets/kubernetes.io/serviceaccount/token"
 
   tasks:
-    - name: Welcome
-      ansible.builtin.debug:
-        msg: "hey karyn"
-
-    - name: Debug token path
-      ansible.builtin.shell: |
-        ls -l "{{ token_path }}"
-
     - name: Read service account token
       ansible.builtin.slurp:
         src: "{{ token_path }}"
       register: sa_token_raw
-
-    - name: debug token
-      ansible.builtin.debug:
-        var: sa_token_raw
 
     - name: Decode service account token
       ansible.builtin.set_fact:
