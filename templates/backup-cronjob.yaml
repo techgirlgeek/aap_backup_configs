@@ -26,7 +26,7 @@ spec:
                 secretName: {{ .Values.controllerAdminSecretName }}
           containers:
             - name: backup-runner
-              image: registry.redhat.io/ansible-automation-platform/ee-minimal-rhel9:latest
+              image: registry.redhat.io/ansible-automation-platform-26/ee-minimal-rhel9@sha256:17be45bba90a79f439d4571f1c92331edfbb9a75efabd58d30ea5424bca8cee0
               command: ["ansible-playbook", "-i localhost,", "/opt/playbook/backup.yaml"]
               env:
                 - name: CONTROLLER_PASSWORD
