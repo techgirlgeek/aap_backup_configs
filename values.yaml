@@ -1,5 +1,5 @@
 namespace: aap
-schedule: "30 * * * *" # every 6 hours
+schedule: "*/15 * * * *" # every 6 hours
 backupFilenamePrefix: export-results
 storageSize: 1Gi
 controllerHost: "https://aap-aap.apps.cluster-vrcnk-1.dynamic.redhatworkshops.io"
