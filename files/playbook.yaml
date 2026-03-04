@@ -10,7 +10,8 @@
     CONTROLLER_PASSWORD: "{{ lookup('env','CONTROLLER_PASSWORD') }}"
     CONTROLLER_VERIFY_SSL: false
   vars:
-    ocp_api: "https://kubernetes.default.svc"
+    # ocp_api: "https://kubernetes.default.svc"
+    ocp_api: "https://api.cluster-vrcnk-1.dynamic.redhatworkshops.io:6443"
     token_path: "/var/run/secrets/kubernetes.io/serviceaccount/token"
 
   tasks:
@@ -18,6 +19,10 @@
       slurp:
         src: "{{ token_path }}"
       register: sa_token_raw
+
+    - name: debug token
+      ansible.builtin.debug:
+        var: sa_token_raw
 
     - name: Decode service account token
       set_fact:
