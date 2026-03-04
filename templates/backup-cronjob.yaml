@@ -15,7 +15,7 @@ spec:
           serviceAccountName: default
           securityContext:
             runAsUser: 1000
-            fsGroup: 1000
+            runAsgroup: 1000
           restartPolicy: OnFailure
           volumes:
             - name: playbook-volume
