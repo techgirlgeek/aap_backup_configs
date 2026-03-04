@@ -12,7 +12,10 @@ spec:
     spec:
       template:
         spec:
-          serviceAccountName: aap-controller
+          serviceAccountName: default
+          securityContext:
+            runAsUser: 1000
+            fsGroup: 1000
           restartPolicy: OnFailure
           volumes:
             - name: playbook-volume
