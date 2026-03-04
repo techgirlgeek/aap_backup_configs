@@ -16,7 +16,7 @@
 
   tasks:
     - name: Read service account token
-      slurp:
+      ansible.builtin.slurp:
         src: "{{ token_path }}"
       register: sa_token_raw
 
@@ -25,22 +25,22 @@
         var: sa_token_raw
 
     - name: Decode service account token
-      set_fact:
+      ansible.builtin.set_fact:
         sa_token: "{{ sa_token_raw['content'] | b64decode }}"
 
     - name: Login to OpenShift using service account token
-      shell: |
+      ansible.builtin.shell: |
         oc login --token="{{ sa_token }}" --server="{{ ocp_api }}" --insecure-skip-tls-verify=true
       environment:
         KUBECONFIG: /tmp/kubeconfig
       register: oc_login
 
     - name: Set timestamp
-      set_fact:
+      ansible.builtin.set_fact:
         timestamp: "{{ lookup('pipe', 'date +%Y%m%d-%H%M%S') }}"
 
     - name: Set output file path
-      set_fact:
+      ansible.builtin.set_fact:
         export_file: "/results/{{ lookup('env','BACKUP_PREFIX') }}-{{ timestamp }}.yaml"
 
     - name: Export all assets
@@ -65,12 +65,12 @@
 #        PATH: "/usr/local/bin:/usr/bin:/bin"  # Ensure awx is in path
 
     - name: Write to output file
-      copy:
+      ansible.builtin.copy:
         content: "{{ export_results.stdout | from_json | to_nice_yaml(width=50, explicit_start=true, explicit_end=true) }}"
         dest: "{{ export_file }}"
 
     - name: Get list of existing export files
-      find:
+      ansible.builtin.find:
         paths: /results
         patterns: "{{ lookup('env','BACKUP_PREFIX') }}-*.yaml"
         age: 0
@@ -79,7 +79,7 @@
       register: export_files
 
     - name: Remove oldest files if more than 20 exist
-      file:
+      ansible.builtin.file:
         path: "{{ item.path }}"
         state: absent
       loop: "{{ export_files.files | sort(attribute='mtime') | reverse | slice(20, export_files.files | length) }}"
