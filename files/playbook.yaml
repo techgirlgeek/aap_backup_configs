@@ -46,19 +46,6 @@
       delay: 15
       until: export_results is succeeded
 
-# Alternative to export task in case the "ansible.controller" collection you have in the image is old and do not respect the CONTROLLER_VERIFY_SSL: false env
-#    - name: Export all controller assets using awx CLI
-#      command: >
-#        awx --conf.host {{ lookup('env','CONTROLLER_HOST') }}
-#            --conf.username {{ lookup('env','CONTROLLER_USERNAME') }}
-#            --conf.password {{ lookup('env','CONTROLLER_PASSWORD') }}
-#            --conf.insecure
-#            --conf.format json
-#            export
-#      register: export_results
-#      environment:
-#        PATH: "/usr/local/bin:/usr/bin:/bin"  # Ensure awx is in path
-
     - name: Write to output file
       ansible.builtin.copy:
         content: "{{ export_results.stdout | from_json | to_nice_yaml(width=50, explicit_start=true, explicit_end=true) }}"
