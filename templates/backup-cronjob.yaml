@@ -14,6 +14,7 @@ spec:
         spec:
           serviceAccountName: default
           securityContext:
+            allowPrivilegeEscalation: false
             runAsUser: 1000
             runAsgroup: 1000
           restartPolicy: OnFailure
