@@ -44,6 +44,8 @@ spec:
                   drop:
                     - ALL # Required by 'restricted'
               env:
+                - name: HOME
+                  value: /tmp
                 - name: CONTROLLER_PASSWORD
                   valueFrom:
                     secretKeyRef:
