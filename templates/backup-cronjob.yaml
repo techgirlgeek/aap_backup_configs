@@ -12,6 +12,9 @@ spec:
     spec:
       template:
         spec:
+          securityContext:
+            runAsUser: 1000770000
+            runAsGroup: 1000770000
           serviceAccountName: default
           restartPolicy: OnFailure
           volumes:
