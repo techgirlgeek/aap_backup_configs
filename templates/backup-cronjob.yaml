@@ -12,9 +12,6 @@ spec:
     spec:
       template:
         spec:
-          securityContext:
-            runAsUser: 0
-            runAsGroup: 0
           serviceAccountName: default
           restartPolicy: OnFailure
           volumes:
