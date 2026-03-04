@@ -15,9 +15,6 @@ spec:
           serviceAccountName: default
           # --- POD LEVEL SECURITY ---
           securityContext:
-            runAsUser: 1000770000
-            runAsGroup: 1000770000
-            fsGroup: 1000770000
             runAsNonRoot: true  # Required by 'restricted'
             seccompProfile:
               type: RuntimeDefault  # Required by 'restricted'
