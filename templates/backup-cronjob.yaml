@@ -35,7 +35,14 @@ spec:
           containers:
             - name: backup-runner
               image: registry.redhat.io/ansible-automation-platform-26/ee-supported-rhel9:latest
-              command: ["ansible-playbook", "-i localhost,", "/opt/playbook/backup.yaml"]
+              # Use the fixed command from our previous step to avoid UID issues
+              command: ["ansible-playbook", "-i", "localhost,", "-c", "local", "/opt/playbook/backup.yaml"]
+              # --- CONTAINER LEVEL SECURITY ---
+              securityContext:
+                allowPrivilegeEscalation: false # Required by 'restricted'
+                capabilities:
+                  drop:
+                    - ALL # Required by 'restricted'
               env:
                 - name: CONTROLLER_PASSWORD
                   valueFrom:
