@@ -2,7 +2,6 @@
 - name: AAP export playbook using service account token
   hosts: localhost
   gather_facts: false
-  become: true
   collections:
     - ansible.controller
   environment:
