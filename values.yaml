@@ -5,4 +5,4 @@ storageSize: 1Gi
 controllerHost: "https://aap-aap.apps.cluster-vrcnk-1.dynamic.redhatworkshops.io/"
 controllerUsername: "admin"
 # Name of the operator-generated secret that contains the controller admin password
-controllerAdminSecretName: "aap-admin-password"
+controllerAdminSecretName: "aap-controller-admin-password"
