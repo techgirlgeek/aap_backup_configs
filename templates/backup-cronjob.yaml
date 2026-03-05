@@ -33,12 +33,7 @@ spec:
             - name: backup-runner
               image: registry.redhat.io/ansible-automation-platform-26/ee-supported-rhel9:latest
               # Use the fixed command from our previous step to avoid UID issues
-              command: ["/bin/sh", "-c"]
-              args:
-                - >-
-                  ansible-galaxy collection install -r /opt/playbook/collections/requirements.yml &&
-                  ansible-playbook -i localhost, -c local /opt/playbook/backup.yaml -vvvv
-              # ["ansible-playbook", "-i", "localhost,", "-c", "local", "/opt/playbook/backup.yaml", "-vvvv"]
+              command: ["ansible-playbook", "-i", "localhost,", "-c", "local", "/opt/playbook/backup.yaml", "-vvvv"]
               # --- CONTAINER LEVEL SECURITY ---
               securityContext:
                 allowPrivilegeEscalation: false # Required by 'restricted'
