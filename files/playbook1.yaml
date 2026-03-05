@@ -30,9 +30,9 @@
     #     KUBECONFIG: /tmp/kubeconfig
     #   register: oc_login
 
-    # - name: Set timestamp
-    #   ansible.builtin.set_fact:
-    #     timestamp: "{{ lookup('pipe', 'date +%Y%m%d-%H%M%S') }}"
+    - name: Set timestamp
+      ansible.builtin.set_fact:
+        timestamp: "{{ lookup('pipe', 'date +%Y%m%d-%H%M%S') }}"
 
     - name: Set output file path
       ansible.builtin.set_fact:
