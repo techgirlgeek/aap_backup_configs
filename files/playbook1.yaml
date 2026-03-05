@@ -10,7 +10,6 @@
     CONTROLLER_PASSWORD: "{{ lookup('env','CONTROLLER_PASSWORD') }}"
     CONTROLLER_VERIFY_SSL: false
     CONTROLLER_OPTIONAL_API_URLPATTERN_PREFIX: '/api/controller/'
-    AWXKIT_API_BASE_PATH: '/api/controller/'
   vars:
     ocp_api: "https://kubernetes.default.svc"
     token_path: "/var/run/secrets/kubernetes.io/serviceaccount/token"
