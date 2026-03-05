@@ -54,7 +54,7 @@
 
     - name: Show results
       ansible.builtin.debug:
-        var: export_results
+        msg: "{{ export_results.stdout | from_json | to_nice_yaml(width=50, explicit_start=true, explicit_end=true) }}"
 
     - name: Write to output file
       ansible.builtin.copy:
