@@ -2,8 +2,6 @@
 - name: AAP export playbook using service account token
   hosts: localhost
   gather_facts: false
-  # collections:
-  #   - ansible.controller
   environment:
     CONTROLLER_OPTIONAL_API_URLPATTERN_PREFIX: '/api/controller/'
     CONTROLLER_HOST: "{{ lookup('env','CONTROLLER_HOST') }}"

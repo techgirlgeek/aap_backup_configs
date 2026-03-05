@@ -1,4 +1,5 @@
 ---
+# Used for running in AAP and NOT through OCP cronjob
 - name: AAP export playbook using service account token
   hosts: localhost
   gather_facts: false
@@ -38,6 +39,10 @@
     - name: Set output file path
       ansible.builtin.set_fact:
         export_file: "/results/{{ lookup('env','BACKUP_PREFIX') }}-{{ timestamp }}.yaml"
+
+    - name: Show output file
+      ansible.builtin.debug:
+        var: export_file
 
     - name: Export all assets
       ansible.controller.export:
