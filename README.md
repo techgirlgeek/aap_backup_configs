@@ -19,14 +19,14 @@ This code is written as a Helm chart to be applied to an OCP cluster, in the sam
 
 ### Initial deployment
 
-The following assumes helm chart is installed in a directory called aap_backup
+The following assumes helm chart is installed in a directory called aap_backup_config (as created by a clone of this repo).
 
 ```bash
-helm install aap-backup ./aap-backup/
+helm install aap-backup ./aap_backup_config/
 ```
 
 ### Make changes to deployment
 
 ```bash
-helm upgrade aap-backup ./aap-backup/
+helm upgrade aap-backup ./aap_backup_config/
 ```
