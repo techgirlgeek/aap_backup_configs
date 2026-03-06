@@ -1,10 +1,8 @@
 ---
-# Used for running in AAP and NOT through OCP cronjob
+# Used for running as a template in AAP and NOT through OCP cronjob
 - name: AAP export playbook using service account token
   hosts: localhost
   gather_facts: false
-  # collections:
-  #   - ansible.controller
   environment:
     CONTROLLER_HOST: "{{ lookup('env','CONTROLLER_HOST') }}"
     CONTROLLER_USERNAME: "{{ lookup('env','CONTROLLER_USERNAME') }}"
@@ -16,22 +14,6 @@
     token_path: "/var/run/secrets/kubernetes.io/serviceaccount/token"
 
   tasks:
-    # - name: Read service account token
-    #   ansible.builtin.slurp:
-    #     src: "{{ token_path }}"
-    #   register: sa_token_raw
-
-    # - name: Decode service account token
-    #   ansible.builtin.set_fact:
-    #     sa_token: "{{ sa_token_raw['content'] | b64decode }}"
-
-    # - name: Login to OpenShift using service account token
-    #   ansible.builtin.shell: |
-    #     oc login --token="{{ sa_token }}" --server="{{ ocp_api }}" --insecure-skip-tls-verify=true
-    #   environment:
-    #     KUBECONFIG: /tmp/kubeconfig
-    #   register: oc_login
-
     - name: Set timestamp
       ansible.builtin.set_fact:
         timestamp: "{{ lookup('pipe', 'date +%Y%m%d-%H%M%S') }}"

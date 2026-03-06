@@ -1,6 +1,6 @@
 # Backup AAP configs using OCP Operator for AAP
 
-The code originated from the following blog post and has been adapted for Ansible Automation Platform (AAP) 2.6 and OpenShift Container Platform (OCP) 4.18.33: https://medium.com/@tamber/optimizing-cloud-native-operations-series-part-8-aap-configuration-as-a-code-caac-backup-2ba89c26f197
+The code originated from the following blog post and has been adapted for Ansible Automation Platform (AAP) 2.6 and OpenShift Container Platform (OCP) 4.18.33: <https://medium.com/@tamber/optimizing-cloud-native-operations-series-part-8-aap-configuration-as-a-code-caac-backup-2ba89c26f197>
 
 Files directory has two playbooks.
 
