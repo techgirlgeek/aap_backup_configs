@@ -4,15 +4,23 @@
   gather_facts: false
   environment:
     CONTROLLER_OPTIONAL_API_URLPATTERN_PREFIX: '/api/controller/'
-    CONTROLLER_HOST: "{{ lookup('env','CONTROLLER_HOST') }}"
-    CONTROLLER_USERNAME: "{{ lookup('env','CONTROLLER_USERNAME') }}"
-    CONTROLLER_PASSWORD: "{{ lookup('env','CONTROLLER_PASSWORD') }}"
     CONTROLLER_VERIFY_SSL: false
   vars:
     ocp_api: "https://kubernetes.default.svc"
     token_path: "/var/run/secrets/kubernetes.io/serviceaccount/token"
 
   tasks:
+    # fail with good error for Automation controller user
+    - name: Determine that both AAP and Machine credentials are set
+      ansible.builtin.assert:
+        that:
+          - "lookup('ansible.builtin.env', 'CONTROLLER_USERNAME') !=''"
+          - "lookup('ansible.builtin.env', 'CONTROLLER_HOST') !=''"
+          - "lookup('ansible.builtin.env', 'CONTROLLER_PASSWORD') !=''"
+        fail_msg:
+          - "Red Hat Ansible Automation Platform credential is not set"
+          - "Please assign correct credentials to the Job Template"
+
     - name: Read service account token
       ansible.builtin.slurp:
         src: "{{ token_path }}"
